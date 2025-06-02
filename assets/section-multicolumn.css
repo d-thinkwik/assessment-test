@@ -191,6 +191,7 @@
   align-items: var(--multicolumn-card-icon-subtitle-position);
   max-width: 450px;
   margin:0 auto;
+  padding:10px;
 }
 .multicolumn-logo-icon .multicolumn-card-icon-text-wrapper{
   margin-left:0px;
