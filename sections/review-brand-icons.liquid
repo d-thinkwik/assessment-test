@@ -1,0 +1,173 @@
+<style>
+  .left-side {
+    width: 25%;
+    padding: 20px;
+    padding-left:0px;
+    position: relative;
+  }
+  .left-side:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate(0px, 24px);
+    height: 70%;
+    border-right: 1px solid #1B1F231A;
+  }
+  .right-side {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    gap:8px;
+    justify-content: end;
+  }
+  .brand-icon {
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+  }
+  .brand-icon-placeholder svg {
+    width: 100px;
+    height: 100px;
+  }
+  .brand-icon-image{
+    width:120px;
+    height:40px;
+  }
+  .review-section-container{
+    display:flex;
+  }
+  .review-section-container .left-side h2{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    border-radius: 8px;
+    padding: 14px;
+    display: inline-block;
+    background: #0000001A;
+    border: 1px solid #000;
+    margin-bottom: 2px;
+  }
+  .brand-icon-image lazy-image{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .review-section{
+    background-color: #F6F6F5;
+  }
+  .review-count p{
+    margin-top:10px;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0%;
+  }
+  .review-count{
+    display:flex;
+    align-items: center;
+    gap:8px;
+  }
+</style>
+
+<div class="review-section">
+
+  <div class="review-section-container page-width">
+  <!-- Left Side: 25% Width -->
+  <div class="left-side">
+    <h2>{{ section.settings.doctor_recommended_title }}</h2>
+    <div class="review-count">
+      <div class="review-count-image">
+        {% if section.settings.count_img != blank %}
+      <lazy-image>
+        <img src="{{ section.settings.count_img | image_url: width: section.settings.count_img.width }}"
+          alt="{{ section.settings.count_img.alt | default: 'Star-ratings' }}"
+          width="{{ section.settings.count_img.width }}"
+          height="{{ section.settings.count_img.height }}"
+          loading="lazy"
+          style="--object-position:{{ section.settings.count_img.presentation.focal_point }}">
+      </lazy-image>
+      {% endif %}
+      </div>
+      <p>{{ section.settings.review_count }}</p>
+    </div>
+  </div>
+
+  <!-- Right Side: 75% Width -->
+  <div class="right-side">
+    {% for block in section.blocks %}
+      <div class="brand-icon">
+        <div class="brand-icon-image">
+       {%if block.settings.image != blank %} 
+        <lazy-image>
+          <img src="{{ block.settings.image | image_url: width: block.settings.image.width }}"
+            alt="{{ block.settings.image.alt | default: 'Brand-icon' }}"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            loading="lazy"
+            style="--object-position:{{ block.settings.image.presentation.focal_point }}">
+        </lazy-image>
+        {% else %}
+        <div class="brand-icon-placeholder">
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Review Brand Icons",
+  "settings": [
+    {
+      "type": "text",
+      "id": "doctor_recommended_title",
+      "label": "Doctor Recommended Title",
+      "default": "#1 Doctor Recommended"
+    },
+    {
+      "type": "image_picker",
+      "id": "count_img",
+      "label": "Count Image"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review Count",
+      "default": "12,000+ 5-star Reviews"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand_icon",
+      "name": "Brand Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Brand Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt Text",
+          "default": "Brand"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review Brand Icons",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

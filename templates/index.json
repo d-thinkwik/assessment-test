@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "video_VUrAq7": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "enable_video_looping": true,
+        "video": "shopify://files/videos/AMIN.O. ENERGY (online-video-cutter.com).mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "cover_image": "shopify://shop_images/Rectangle_3.png",
+        "description": "video",
+        "full_width": true,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "overlay_text": "Great things never camefrom comfort zones.",
+        "button_text": "Shop Now"
+      }
+    },
+    "marquee_zDwJAD": {
+      "type": "marquee",
+      "blocks": {
+        "text_EXGYB7": {
+          "type": "text",
+          "settings": {
+            "content": "High Quality Ingredients"
+          }
+        },
+        "text_BYFe3z": {
+          "type": "text",
+          "settings": {
+            "content": "Independently Certified"
+          }
+        },
+        "text_94XPrW": {
+          "type": "text",
+          "settings": {
+            "content": "Expert Driven"
+          }
+        },
+        "text_FnJ6TY": {
+          "type": "text",
+          "settings": {
+            "content": "Shipped Internationally"
+          }
+        }
+      },
+      "block_order": [
+        "text_EXGYB7",
+        "text_BYFe3z",
+        "text_94XPrW",
+        "text_FnJ6TY"
+      ],
+      "name": "t:sections.marquee_text.presets.name",
+      "settings": {
+        "speed": 50,
+        "background_color": "#000",
+        "reverse": false,
+        "icon_img": "shopify://shop_images/Star_2.png",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "review_brand_icons_e3Cx8Q": {
+      "type": "review-brand-icons",
+      "blocks": {
+        "brand_icon_gRL3Hj": {
+          "type": "brand_icon",
+          "settings": {
+            "image": "shopify://shop_images/Rolling_Stone_logo_1.png",
+            "alt_text": "Brand"
+          }
+        }
+      },
+      "block_order": [
+        "brand_icon_gRL3Hj"
+      ],
+      "name": "Review Brand Icons",
+      "settings": {
+        "doctor_recommended_title": "#1 Doctor Recommended",
+        "review_count": "12,000+ 5-star Reviews"
+      }
+    }
+  },
+  "order": [
+    "video_VUrAq7",
+    "marquee_zDwJAD",
+    "review_brand_icons_e3Cx8Q"
+  ]
+}
