@@ -1,0 +1,357 @@
+{%- style -%}
+  #shopify-section-{{ section.id }}{
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    --bg-color: {{ section.settings.bg_color }};
+    --column-gap: {{ section.settings.spacing }}px;
+  }
+  .vidpro-content .vidpro-heading{
+    color: {{ section.settings.heading_color }};
+  }
+  .grid-2-column-desk .grid-item{
+    width:calc(50% - {{ section.settings.spacing }}px);
+    max-width:calc(50% - {{ section.settings.spacing }}px);
+  }
+  .grid-3-column-desk .grid-item{
+    width:calc(33.33% - {{ section.settings.spacing }}px);
+    max-width:calc(33.33% - {{ section.settings.spacing }}px);
+  }
+  .grid-4-column-desk .grid-item{
+    width:calc(25% - {{ section.settings.spacing }}px);
+    max-width:calc(25% - {{ section.settings.spacing }}px);
+  }
+  .grid-5-column-desk .grid-item{
+    width:calc(20% - {{ section.settings.spacing }}px);
+    max-width:calc(20% - {{ section.settings.spacing }}px);
+  }
+  .grid-6-column-desk .grid-item{
+    width:calc(16.66% - {{ section.settings.spacing }}px);
+    max-width:calc(16.66% - {{ section.settings.spacing }}px);
+  }
+  @media(max-width: 1024px){ 
+    #shopify-section-{{ section.id }}{
+      padding-top: {{ section.settings.padding_top | times: 0.50 | round: 0 }}px;
+    }
+  }
+  @media(max-width: 767px){
+    #shopify-section-{{ section.id }}{
+      padding-top: {{ section.settings.padding_top | times: 0.25 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.25 | round: 0 }}px;
+    }
+    .grid-2-column-tablet .grid-item{
+      width:calc(50% - {{ section.settings.spacing }}px);
+      max-width:calc(50% - {{ section.settings.spacing }}px);
+    }
+  }
+  .lazy-autoplay-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.video-product-section{
+  background-color: {{ section.settings.bg_color }};
+}
+{%- endstyle -%}
+
+{{ 'component-video-product.css' | asset_url | stylesheet_tag: preload: true }}
+
+<section class="video-product-section">
+  <div class="vidpro-content">
+    <div class="vidpro-subtitle">
+        <p>{{ section.settings.subtitle }}</p>
+    </div>
+    {%- if section.settings.title -%}
+      <{{ section.settings.heading_size }}
+        class="vidpro-heading container text-{{ section.settings.heading_alignment }}"
+        ms-aos
+        data-ms-delay="100"
+      >
+        {{- section.settings.title -}}
+      </{{ section.settings.heading_size }}>
+    {%- endif -%}
+    <div class="vidpro-btn-container">
+      <a href="{{ section.settings.button_link }}" class="btn-link-effect">{{ section.settings.button_text }}</a>
+    </div>
+  </div>
+
+  <div class="container-narrow swiper vidpro-swiper">
+    <div class="vidprocontent swiper-wrapper grid-{{ section.settings.video_per_row }}-column-desk">
+      {% for block in section.blocks %}
+        {% assign product = all_products[block.settings.video_product] %}
+        {% assign product_image = product.featured_image %}
+        {% assign poster = block.settings.video.preview_image | default: block.settings.cover_image %}
+
+        <div class="vidproinner grid-item swiper-slide">
+          {% if block.settings.video != blank %}
+            <div class="videocontent">
+              <deferred-media
+                class="video-section__media deferred-media gradient global-media-settings"
+                style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
+              >
+                {{
+                  block.settings.video
+                  | video_tag: image_size: '1100x', autoplay: true, loop: true
+                  | replace: '<img ', '<img loading="lazy" '
+                }}
+              </deferred-media>
+            </div>
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+          {% if block.settings.video_product != blank %}
+            <div class="procontent-wrapper">
+              <div class="proimg">
+                <a href="{{ product.url }}" class="img-wrapper">
+                  <img
+                    src="{{ product_image | image_url: width: product_image.width }}"
+                    alt="{{ product_image.alt }}"
+                    loading="lazy"
+                    width="{{ product_image.width.width }}"
+                    height="{{ product_image.width.height }}"
+                  >
+                </a>
+              </div>
+              <div class="proinner">
+                <span class="providtitle">
+                  <a href="{{ product.url }}" class="btn-link-effect">{{ product.title | escape }}</a>
+                </span>
+                <span class="pricecontent">
+                  {%- if product.selected_or_first_available_variant.compare_at_price != blank -%}
+                    <span class="compare-price">{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                  <span class="sale-price">{{ product.price | money }}</span>
+                </span>
+              </div>
+              <div class="probtn">
+                <div class="probtn-inner">
+                    {% render 'pro-atc-btn' %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+
+  </div>
+  <div class="swiper-btn-container">
+    <div class="custom-swiper-button-prev">
+      <div class="prev-arrow-container swiper-btn">
+        {% render 'swiper-prev-btn' %}
+      </div>
+    </div>
+    <div class="custom-swiper-button-next">
+      <div class="next-arrow-container swiper-btn">
+        {% render 'swiper-next-btn' %}   
+      </div>
+    </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    swiperInstance = new Swiper(".vidpro-swiper", {
+        spaceBetween: 10,
+        loop: true,
+        grabCursor: true,
+        speed: 500,
+        slidesPerView: {{ section.settings.video_per_row }},
+        navigation: {
+          nextEl: '.custom-swiper-button-next',
+          prevEl: '.custom-swiper-button-prev',
+        },
+       {% if section.settings.autoplay_show %}
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },  
+        {% endif %}
+      });
+    });
+</script>
+
+<script src="{{ 'video-product.js' | asset_url }}" type="text/javascript" defer></script>
+
+{% schema %}
+{
+  "name": "Video Product Slider",
+  "class": "section-video-product",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media Settings"
+    },
+    {
+      "type": "range",
+      "id": "video_per_row",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Videos Per Row"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "min": 2,
+      "max": 30,
+      "step": 2,
+      "default": 26,
+      "label": "Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F6F6F5"
+    },
+    {
+      "type": "header",
+      "content": "Header Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop the Style You Admire!"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Shop the Style You Admire!"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Font Size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "Extra Large"
+        },
+        {
+          "value": "h2",
+          "label": "Large"
+        },
+        {
+          "value": "h3",
+          "label": "Medium"
+        },
+        {
+          "value": "h4",
+          "label": "Small"
+        },
+        {
+          "value": "h5",
+          "label": "Extra Small"
+        },
+        {
+          "value": "h6",
+          "label": "Tiny"
+        }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_show",
+      "label": "Show Autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color"
+    },
+    {
+      "type": "header",
+      "content": "Section Vertical Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video-product",
+      "name": "Video Product",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "product",
+          "id": "video_product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Product Slider"
+    }
+  ]
+}
+{% endschema %}

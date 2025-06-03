@@ -1657,6 +1657,37 @@
     "main-addresses": {
       "name": "Addresses"
     },
+    "video_product": {
+      "name": "Video product",
+      "settings": {
+        "media": {
+          "label": "Media"
+        },
+        "videos_per_row": {
+          "label": "Video per row"
+        },
+        "spacing": {
+          "label": "Spacing"
+        },
+        "header": {
+          "content": "Header"
+        }
+      },
+      "blocks": {
+        "name": "Video product",
+        "settings": {
+          "video": {
+            "label": "Custom video url"
+          },
+          "product": {
+            "label": "Select product"
+          }
+        }
+      },
+      "presets": {
+        "name": "Video product"
+      }
+    },
     "main-article": {
       "name": "Blog post",
       "blocks": {
