@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
       // Navigation arrows
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.pro-info-button-next',
+        prevEl: '.pro-info-button-prev',
       },
   
       // Add some effects and callbacks

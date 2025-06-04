@@ -1,0 +1,239 @@
+{%- style -%}
+  #shopify-section-{{ section.id }}{
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  .section-instagram .section-title{
+    color: {{ section.settings.heading_color | default: '#082A32' }};
+  }
+  .section-instagram .section-header__description{
+    background: {{ section.settings.background_color | default: '#EFEFEF' }};
+    color: {{ section.settings.description_color | default: '#797979' }};
+  }
+  @media (max-width: 768px){
+    #shopify-section-{{ section.id }}{
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+  }
+{%- endstyle -%}
+
+{{ 'component-instagram.css' | asset_url | stylesheet_tag: preload: true }}
+
+<section class="instagram-section" ms-aos data-ms-delay="100">
+
+  <div class="instagram-container page-width">
+    <div class="container">
+      {%- if section.settings.title -%}
+        <div class="section-header text-{{ section.settings.heading_alignment }}">
+          <{{ section.settings.heading_size }} class="section-title">
+            {{- section.settings.title -}}
+          </{{ section.settings.heading_size }}>
+        </div>
+      {%- endif -%}
+      <div class="instagram-wrapper container-narrow">
+        {% for block in section.blocks %}
+            {%  case block.type %}
+                {%  when 'instagram' %}
+          <lazy-image class="instagram-item">
+            {%- if block.settings.image -%}
+              <img
+                src="{{ block.settings.image | image_url: width: block.settings.image.width, format: 'webp' }}"
+                alt="{{ block.settings.image.alt }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+              >
+            {%- else -%}
+              <lazy-image>
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </lazy-image>
+            {%- endif -%}
+            <div class="instagram-overlay">
+              <span class="instagram-icon">{%- render 'instragram-icon' -%}</span>
+            </div>
+          </lazy-image>
+        {% when 'instagram_handle' %}
+            <div class="instagram-handle">
+                <div class="instagram-handle-content">
+                  <div class="instagram-handle-link">  
+                    <div class="instagram-handle-icon">
+                       {{ block.settings.store_icon | image_url: width: 60 | image_tag: class: 'instagram-handle-icon-image' }}
+                    </div>
+                    <div class="instagram-handle-text">
+                        <p>{{ block.settings.handle_title }}</p>
+                    </div>
+                  </div>
+                  <div class="instagram-handle-button">
+                    <a href="https://www.instagram.com/{{ block.settings.handle_title }}" class="button">{{ block.settings.handle_button_text }}</a>
+                  </div>
+                </div>
+            </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+      {%- if section.settings.description -%}
+        <div class="section-header__description text-center container-narrow">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram Section",
+  "class": "section section-instagram",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title for the Instagram section"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description for the Instagram section"
+    },
+    {
+      "type": "header",
+      "content": "Customization Options"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Font size for the heading",
+      "options": [
+        {
+          "value": "h1",
+          "label": "Extra Large"
+        },
+        {
+          "value": "h2",
+          "label": "Large"
+        },
+        {
+          "value": "h3",
+          "label": "Medium"
+        },
+        {
+          "value": "h4",
+          "label": "Small"
+        },
+        {
+          "value": "h5",
+          "label": "Extra Small"
+        },
+        {
+          "value": "h6",
+          "label": "Tiny"
+        }
+      ],
+      "default": "h4"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alignment for the heading",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Color Options"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color for the heading"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Color for the description"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color for the section"
+    },
+    {
+      "type": "header",
+      "content": "Vertical Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding for the section",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding for the section",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "instagram",
+      "name": "Instagram Image Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image for the Instagram block"
+        }
+      ]
+    },
+    {
+        "type": "instagram_handle",
+        "name": "Instagram Handle",
+        "settings": [
+          {
+            "type": "text",
+            "id": "handle_title",
+            "label": "Instagram Handle"
+          },
+          {
+            "type": "image_picker",
+            "id": "store_icon",
+            "label": "Store Icon"
+          },
+          {
+            "type": "text",
+            "id": "handle_button_text",
+            "label": "Button Text",
+            "default": "Follow"
+          }
+        ]
+      }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Section Preset",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

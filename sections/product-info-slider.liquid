@@ -1,13 +1,13 @@
 {{ 'product-info-slider.css' | asset_url | stylesheet_tag }}
 
 
-
-<div class="container">
+<section class="product-info-slider">
+<div class="page-width">
     <div class="product-header">
-        <p class="tagline">{{ section.settings.sub_title }} Simple & Effective Ingredients</p>
-        <h1 class="product-title">{{ section.settings.title }} Customized Protein Powder</h1>
+        <p class="tagline">{{ section.settings.sub_title }}</p>
+        <h1 class="product-title">{{ section.settings.title }}</h1>
     </div>
-    <div class="swiper-container">
+    <div class="swiper-container info-slider-container">
       <div class="swiper mySwiper">
         <div class="swiper-wrapper">
           {% for block in section.blocks %}
@@ -18,17 +18,14 @@
                 </div>
                 <div class="product-info">
                   <div class="blend-section">
-                    <h2 class="section-title">{{ block.settings.title }}</h2>
+                    <h2 class="blend-title">{{ block.settings.title }}</h2>
 
                     <div class="blend-features">
                         {% for i in (1..3) %}
                             {% assign feature_title = 'feature_' | append: i %}
                         <div class="feature">
                           <div class="feature-icon">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"></path>
-                              <path d="M15 12L10.5 15L10.5 9L15 12Z" fill="currentColor"></path>
-                            </svg>
+                            {{ 'leaves.svg' | inline_asset_content }}
                           </div>
                           <span class="{{ i }}">{{ block.settings[feature_title] }}</span>
                         </div>
@@ -37,20 +34,17 @@
                   </div>
                 
                   <div class="ingredients-section">
-                    <h2 class="section-title">{{ block.settings.ingredients_title }} Active Ingredients</h2>
+                    <h2 class="ingredients-title">{{ block.settings.ingredients_title }}</h2>
                     <div class="ingredients-grid">
                         {% for i in (1..3) %}
                             {% assign ingredient_title = 'ingredient_title_' | append: i %}
                             {% assign ingredient_desc = 'ingredient_desc_' | append: i %}
                       <div class="ingredient-card">
                         <div class="ingredient-icon">
-                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"></path>
-                            <path d="M15 12L10.5 15L10.5 9L15 12Z" fill="currentColor"></path>
-                          </svg>
+                          {{ 'active-leaves.svg' | inline_asset_content }}
                         </div>
-                        <h3 {{ block.settings[ingredient_title] }} class="ingredient-title {{ i }}">{{ block.settings[ingredient_title] }} Whey Protein Isolate</h3>
-                        <p {{ block.settings[ingredient_desc] }} class="ingredient-desc {{ i }}">{{ block.settings[ingredient_desc] }} Low Calorie with Virtually No Fat or Lactose. Quickly Absorbed To Maximize Muscle Building &amp; Repair.</p>
+                        <h3 {{ block.settings[ingredient_title] }} class="ingredient-title {{ i }}">{{ block.settings[ingredient_title] }}</h3>
+                        <p {{ block.settings[ingredient_desc] }} class="ingredient-desc {{ i }}">{{ block.settings[ingredient_desc] }}</p>
                       </div>
                         {% endfor %}
                     </div>
@@ -63,12 +57,23 @@
           {% endfor %}
         </div>
       </div>
-      <!-- Navigation buttons -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
     </div>
-  </div>
 
+  <div class="pro-info-button-container">   
+    <div class="pro-info-button-prev">
+      <div class="swiper-btn">
+      {% render 'swiper-prev-btn' %}
+      </div>
+    </div>
+    <div class="pro-info-button-next">
+      <div class="swiper-btn">
+      {% render 'swiper-next-btn' %}
+      </div>
+    </div>
+  </div> 
+
+  </div>
+</section>
 
           
  
@@ -80,7 +85,18 @@
 {% schema %}
 {
   "name": "Product Info Slider",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    }
+  ],
   "blocks": [
     {
       "type": "slide",
@@ -113,18 +129,18 @@
         },
         {
           "type": "text",
-          "id": "feature_desc",
-          "label": "Feature Description"
+          "id": "ingredients_title",
+          "label": "Ingredients Title"
         },
         {
           "type": "text",
-          "id": "ingredient_title",
-          "label": "Ingredient Title"
+          "id": "ingredient_title_1",
+          "label": "Ingredient Title 1"
         },
         {
           "type": "text",
-          "id": "ingredient_desc",
-          "label": "Ingredient Description"
+          "id": "ingredient_desc_1",
+          "label": "Ingredient Description 1"
         },
         {
           "type": "text",

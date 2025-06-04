@@ -68,7 +68,7 @@
           >
             {%- for block in section.blocks -%}
               <div
-                class="footer-block grid__item{% if block.type == 'link_list' %} footer-block--menu{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                class="footer-block grid__item {%  if block.type == 'newsletter' %}footer-block-newsletter{% endif %} {% if block.type == 'contact-us' %}footer-block-contact{% endif %}  {% if block.type == 'link_list' %} footer-block--menu{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                 {{ block.shopify_attributes }}
                 {% if settings.animations_reveal_on_scroll %}
                   data-cascade
@@ -101,6 +101,42 @@
                         {%- endfor -%}
                       </ul>
                     {%- endif -%}
+                  {% when 'newsletter' %}
+                    <div class="footer__newsletter">
+                      <h3 class="footer__heading">Be a Part of Our Journey</h3>
+                      <p class="footer__text">
+                        Welcome to {{ shop.name }}. Sign up for exclusive content and we'll send you 10% off.
+                      </p>
+
+                      {% form 'customer', class: 'footer__form' %}
+                        <input type="hidden" name="contact[tags]" value="newsletter">
+                        <div class="footer__input-group">
+                          <input
+                            type="email"
+                            name="contact[email]"
+                            class="footer__input"
+                            placeholder="{{ 'newsletter.label' | t }}"
+                            required
+                          >
+                          <button type="submit" class="footer__button">
+                            {{ 'newsletter.button_label' | t }}
+                          </button>
+                        </div>
+                      {% endform %}
+                    </div>
+                  {% when 'contact-us' %}
+                    <div class="footer__contact">
+                      <h4 class="footer__column-title">Contact Us</h4>
+                      <p class="footer__text">Let Us Help You</p>
+                      <p class="footer__phone">{{ settings.phone_number | default: '(888) 860-0572' }}</p>
+
+                      <div class="footer__social-connect">
+                        <h5 class="footer__social-title">Connect With Us</h5>
+                        {%- if section.settings.show_social and has_social_icons -%}
+                          {%- render 'social-icons', class: 'footer__list-social' -%}
+                        {%- endif -%}
+                      </div>
+                    </div>
                   {%- when 'brand_information' -%}
                     <div class="footer-block__brand-info">
                       {%- if settings.brand_image != blank -%}
@@ -242,9 +278,11 @@
             </div>
           {%- endif -%}
 
+          {% comment %}
           {%- if section.settings.show_social and has_social_icons -%}
             {%- render 'social-icons', class: 'footer__list-social' -%}
           {%- endif -%}
+          {% endcomment %}
         </div>
       </div>
     {%- endunless -%}
@@ -345,6 +383,22 @@
           "label": "t:sections.footer.blocks.link_list.settings.menu.label"
         }
       ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "contact-us",
+      "name": "Contact Us",
+      "settings": []
     },
     {
       "type": "brand_information",

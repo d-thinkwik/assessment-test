@@ -1,0 +1,81 @@
+{{ 'image-overlay.css' | asset_url | stylesheet_tag }}
+{% style %}
+  :root{
+    --hero-bg-image:url({{ section.settings.hero_image | image_url: width: section.settings.hero_image.width }});
+  }
+{% endstyle %}
+
+<section class="image-overlay">
+<div class="hero page-width">
+    <div class="hero-background">
+        <div class="hero-overlay">
+            {{ section.settings.hero_title }}
+        </div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">{{ section.settings.hero_title }}</h1>
+            <p class="hero-subtitle">{{ section.settings.hero_subtitle }}</p>
+            <div class="hero-buttons">
+                <button class="button-primary"><a href="{{ section.settings.primary_button_link }}">{{ section.settings.primary_button_text }}</a></button>
+                <button class="button-secondary"><a href="{{ section.settings.secondary_button_link }}">{{ section.settings.secondary_button_text }}</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+{% schema %}
+{
+  "name": "Image Overlay",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "The Next Generation is Here"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Innovative Engineering. Intelligent Design. Meet The Plunge MK.1"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary Button Text",
+      "default": "Take The Plunge"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text",
+      "default": "Dive Deeper"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Overlay",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+
+

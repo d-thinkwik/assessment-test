@@ -3577,7 +3577,9 @@ details-disclosure > details {
 .progress-bar .progress-bar-value {
   display: block;
 }
-
+a{
+  text-decoration: none;
+}
 @keyframes indeterminateAnimation {
   0% {
     transform: translateX(-20%) scaleX(0);

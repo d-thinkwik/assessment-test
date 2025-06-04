@@ -1,0 +1,118 @@
+.hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 750px;
+    margin-top:50px;
+    margin-bottom:50px;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--hero-bg-image);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid transparent;
+    border-radius: 8px;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:rgba(0, 0, 0, 0.4);
+    font-size: 0;
+}
+
+.hero-content {
+    position: relative;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:100%;
+    z-index: 1; 
+}
+
+.hero-text {
+    max-width: 700px;
+}
+
+.hero-title {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
+    margin-bottom: 32px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+}
+.button-primary {
+    background-color:#fff;
+    color: #000;
+    border: none;
+    padding: 15.5px 32.5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.button-primary:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.button-primary a{
+    color: #000;
+}
+.button-secondary a{
+    color: #fff;
+}
+.button-secondary {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 15.5px 32.5px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.button-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+        text-align: center;
+    }
+}
