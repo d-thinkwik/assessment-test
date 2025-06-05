@@ -253,6 +253,20 @@
           nextEl: '.tab-swiper-button-next',
           prevEl: '.tab-swiper-button-prev',
         },
+        breakpoints: {
+          320: {
+              slidesPerView: 1, 
+          },
+          640: {
+              slidesPerView: 2, 
+          },
+          768: {
+              slidesPerView: 3, 
+          },
+          1024: {
+              slidesPerView: {{ section.settings.column_to_show }}, 
+          },
+        },
        {% if section.settings.autoplay_show %}
         autoplay: {
           delay: 3000,

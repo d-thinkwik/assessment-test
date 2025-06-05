@@ -286,4 +286,21 @@
       width: 100%;
       margin-top: var(--spacing-2);
     }
+    .pro-info-button-prev{
+      left:50%;
+      bottom: 0;
+      transform: translate(-50px, 60px);
+      top:96%;
+    }
+    .pro-info-button-next{
+      right: 33%;
+      bottom: 0;
+      transform: translate(-20px, 60px);
+      top:96%;
+    }
+  }
+  @media (max-width: 500px) {
+    .pro-info-button-prev, .pro-info-button-next{
+      top:98%
+    }
   }

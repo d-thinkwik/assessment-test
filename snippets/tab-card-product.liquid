@@ -162,6 +162,9 @@
             </div>
             <div class="add-to-cart-tab">
                 <div class="add-to-cart-tab-btn">
+                  {% comment %}
+                  {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
+                  {% endcomment %}
                     <a href="{{ card_product.url }}" class="tab-add-to-cart-btn">
                        Add to Cart
                     </a>

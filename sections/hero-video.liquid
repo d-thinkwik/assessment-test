@@ -1,0 +1,298 @@
+{%- style -%}
+  #shopify-section-{{ section.id }}{
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    --heading-color: {{ section.settings.heading_color }};
+    --overlay_opacity: {{ section.settings.overlay_opacity }};
+    --overlay_color: {{ section.settings.overlay_color }};
+  }
+  @media(max-width:768px){
+    #shopify-section-{{ section.id }}{
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+  }
+{%- endstyle -%}
+
+{{ 'component-video.css' | asset_url | stylesheet_tag:preload: true }}
+
+<section class="video-section">
+  <video-hero class="{% if section.settings.enable_full_width %} full-width {% else %} container{% endif %}">
+    <div class="custom-video-wrapper {% if section.settings.video_type == 'link' and section.settings.video_url != blank %}has-iframe{% endif %}" ms-aos data-ms-delay="100">
+      {%- if section.settings.video_type == 'link' and section.settings.video_url != blank -%}
+        {%- if section.settings.video_url.type == 'youtube' -%}
+          <div class="youtube-video-player"
+            data-youtubeid="{{ section.settings.video_url.id }}"
+            data-youtubeautoplay="{%- if section.settings.video_autoplay == true -%}1{%- else -%}0{%- endif -%}"
+            data-youtubemuted="{%- if section.settings.video_mute == true -%}1{%- else -%}0{%- endif -%}"
+          >
+            <div class="video-container">
+              <div id="player"></div>
+            </div>
+          </div>
+        {%- elsif section.settings.video_url.type == 'vimeo' -%}
+          <div class="vimeo-video-player"
+            data-vimeoid="{{ section.settings.video_url.id }}"
+            data-vimeoautoplay="{{ section.settings.video_autoplay }}"
+            data-vimeomuted="{{ section.settings.video_mute }}"
+          >
+            <div class="player-container"></div>
+          </div>
+        {%- endif -%}
+      {%- elsif section.settings.video_type == 'video' and section.settings.video != blank -%}
+        {{ 
+          section.settings.video | media_tag: muted: section.settings.video_mute, controls: false, autoplay: section.settings.video_autoplay, loop: true, class: 'custom-video', data-autoplay: section.settings.video_autoplay | replace: '<img src','<img alt="video-image" src'
+         }}
+      {%- else -%}
+        {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+      {%- if section.settings.video_autoplay != true -%}
+        <div class="thumbnail-wrapper thumbnail-wrapper-id">
+          {%- assign thumbnail = section.settings.thumbnail -%}
+          {%- if thumbnail -%}
+            <lazy-image class="img-wrapper">
+              <img
+                src="{{ thumbnail | image_url: width: section.settings.thumbnail.width, format: 'webp' }}"
+                alt="{{ thumbnail.alt | default: shop.name }}"
+                style="--object-position: {{ thumbnail.presentation.focal_point }};"
+                loading="lazy"
+                width="{{ thumbnail.width }}"
+                height="{{ thumbnail.height }}"
+              >
+            </lazy-image>
+          {%- endif -%}
+          <div class="thumbnail-inner-box">
+            {% if section.settings.thumbnail_heading != blank %}
+              <{{ section.settings.heading_size }} class="thumbnail-heading text-{{ section.settings.heading_alignment }}">
+                {{ section.settings.thumbnail_heading }}
+              </{{ section.settings.heading_size }}>
+            {%- endif -%}
+            {% if section.settings.thumbnail_subheading != blank %}
+              <p class="thumbnail-subheading text-{{ section.settings.heading_alignment }}">
+                {{ section.settings.thumbnail_subheading }}
+              </p>
+            {%- endif -%}
+            <button class="custom-video-btn">
+             {{  'play.svg' | inline_asset_url  }}
+            </button>
+          </div>
+        </div>
+      {%- endif -%}
+      <button class="play_btn second_play-btn">
+        {{  'play.svg' | inline_asset_url  }}
+      </button>
+    </div>
+  </video-hero>
+
+
+   <div class="video-overlay">
+    <div class="page-width">
+    <p class="overlay-text">{{ section.settings.overlay_text }}</p>
+    <button class="overlay-button">{{ section.settings.button_text }}</button>
+    </div>
+  </div>
+
+</section>
+
+<script src="{{ 'youtube-iframe-api.js' | asset_url }}" defer></script>
+<script src="{{ 'vimeo-player.js' | asset_url }}" defer></script>
+<script src="{{ 'video.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Video Section",
+  "class": "section-video",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_full_width",
+      "label": "Enable Full Width",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Thumbnail Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail",
+      "label": "Thumbnail Image",
+      "info": "Select a thumbnail image for the video."
+    },
+    {
+        "type": "text",
+        "id": "overlay_text",
+        "label": "Overlay Text",
+        "default": "Your Overlay Text Here"
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Click Here"
+    },
+    {
+      "type": "header",
+      "content": "Heading Size Settings"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "Extra Large"
+        },
+        {
+          "value": "h2",
+          "label": "Large"
+        },
+        {
+          "value": "h3",
+          "label": "Medium"
+        },
+        {
+          "value": "h4",
+          "label": "Small"
+        },
+        {
+          "value": "h5",
+          "label": "Extra Small"
+        },
+        {
+          "value": "h6",
+          "label": "Tiny"
+        }
+      ],
+      "default": "h4"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "default": 0.4
+    },
+    {
+      "type": "header",
+      "content": "Video Settings"
+    },
+    {
+      "type": "radio",
+      "id": "video_type",
+      "label": "Video Type",
+      "options": [
+        {
+          "label": "Link",
+          "value": "link"
+        },
+        {
+          "label": "Video",
+          "value": "video"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video_url",
+      "accept": ["vimeo", "youtube"],
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "Enter a valid Vimeo or YouTube URL.",
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Choose Video"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay",
+      "label": "Autoplay Video",
+      "info": "Enable autoplay for the video.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "video_mute",
+      "label": "Mute Video",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Vertical Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 50,
+      "unit": "px",
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 50,
+      "unit": "px",
+      "step": 2,
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

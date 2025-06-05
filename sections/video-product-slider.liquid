@@ -22,7 +22,7 @@
   }
   .grid-5-column-desk .grid-item{
     width:calc(20% - {{ section.settings.spacing }}px);
-    max-width:calc(20% - {{ section.settings.spacing }}px);
+    /* max-width:calc(20% - {{ section.settings.spacing }}px); */
   }
   .grid-6-column-desk .grid-item{
     width:calc(16.66% - {{ section.settings.spacing }}px);
@@ -56,8 +56,8 @@
 
 {{ 'component-video-product.css' | asset_url | stylesheet_tag: preload: true }}
 
-<section class="video-product-section">
-  <div class="vidpro-content">
+<section class="video-product-section data">
+  <div class="vidpro-content page-width">
     <div class="vidpro-subtitle">
         <p>{{ section.settings.subtitle }}</p>
     </div>
@@ -152,23 +152,37 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-    swiperInstance = new Swiper(".vidpro-swiper", {
-        spaceBetween: 10,
-        loop: true,
-        grabCursor: true,
-        speed: 500,
-        slidesPerView: {{ section.settings.video_per_row }},
-        navigation: {
-          nextEl: '.custom-swiper-button-next',
-          prevEl: '.custom-swiper-button-prev',
-        },
-       {% if section.settings.autoplay_show %}
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },  
-        {% endif %}
-      });
+        swiperInstance = new Swiper(".vidpro-swiper", {
+            spaceBetween: 10,
+            loop: true,
+            grabCursor: true,
+            speed: 500,
+            slidesPerView: {{ section.settings.video_per_row }},
+            navigation: {
+                nextEl: '.custom-swiper-button-next',
+                prevEl: '.custom-swiper-button-prev',
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1, 
+                },
+                640: {
+                    slidesPerView: 2, 
+                },
+                768: {
+                    slidesPerView: 3, 
+                },
+                1024: {
+                    slidesPerView: {{ section.settings.video_per_row }}, 
+                },
+            },
+            {% if section.settings.autoplay_show %}
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            }
+            {% endif %}
+        });
     });
 </script>
 

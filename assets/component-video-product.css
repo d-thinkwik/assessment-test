@@ -120,6 +120,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
   @media(max-width: 767px) {
     .vidprocontiner .vidprocontent {
@@ -141,7 +142,13 @@
       max-height: 420px;
     }
     .vidpro-content .vidpro-heading{
-      text-align: left;
+      text-align: center;
+    }
+    .custom-swiper-button-prev{
+      transform: translate(-228px, -25px);
+    }
+    .custom-swiper-button-next {
+      transform: translate(180px, -65px);
     }
   }
   
@@ -166,5 +173,14 @@
       height: 330px;
       object-fit: cover;
     }
-  
+    .swiper-btn{
+      width: 30px;
+      height: 30px;
+    }
+    .custom-swiper-button-prev{
+      transform: translate(-150px, -13px);
+    }
+    .custom-swiper-button-next {
+      transform: translate(120px, -45px);
+    }
   }

@@ -1345,3 +1345,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
+// header sticky
+let lastScrollTop = 0;
+const header = document.querySelector("sticky-header");
+const headerHeight = header.offsetHeight;
+
+window.addEventListener("scroll", function () {
+  let currentScroll = window.scrollY;
+  if (currentScroll > lastScrollTop) {
+    header.classList.add("headerhidden");
+    header.style.top = `-${headerHeight}px`;
+  } else {
+    header.classList.remove("headerhidden");
+    header.style.top = "0px";
+  }
+  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});

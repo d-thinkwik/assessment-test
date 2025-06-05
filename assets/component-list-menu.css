@@ -36,6 +36,8 @@
   right: 0;
   z-index: 1000;
   background-color: transparent;
+  transition: top 0.5s ease-in-out;
+  padding:0px 40px;
 }
 header.header{
   background-color: #fff;
@@ -53,4 +55,16 @@ header.header{
 .header-search-icon .header__icon .svg-wrapper{
   height: 100%;
   width: 100%;
+}
+
+@media (max-width: 989px) {
+  header.header{
+    margin-top:0px;
+    border-radius: 0px;
+  }
+  .header-absolute{
+    position:relative;
+    background-color: #fff;
+    padding:0px;
+  }
 }

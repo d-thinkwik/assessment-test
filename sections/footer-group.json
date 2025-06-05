@@ -13,9 +13,57 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "newsletter_bhRewx": {
+          "type": "newsletter",
+          "settings": {
+            "heading": ""
+          }
+        },
+        "link_list_YRWbEB": {
+          "type": "link_list",
+          "settings": {
+            "heading": "About Us",
+            "menu": "about-us"
+          }
+        },
+        "link_list_a4bgji": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Support",
+            "menu": "support"
+          }
+        },
+        "link_list_KVy8dF": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Important Link",
+            "menu": "important-link"
+          }
+        },
+        "link_list_MzWdK9": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Legal",
+            "menu": "legal"
+          }
+        },
+        "contact_us_mUpz8Y": {
+          "type": "contact-us",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "newsletter_bhRewx",
+        "link_list_YRWbEB",
+        "link_list_a4bgji",
+        "link_list_KVy8dF",
+        "link_list_MzWdK9",
+        "contact_us_mUpz8Y"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
-        "newsletter_enable": true,
+        "newsletter_enable": false,
         "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": true,
         "show_social": true,

@@ -6,7 +6,9 @@
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
-
+  #shopify-section-{{ section.id }} .multicolumn-card-icon-text-wrapper {
+    align-items: {{ section.settings.multicolumn_card_icon_subtitle_position }};
+  }
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
@@ -15,8 +17,9 @@
   }
   :root{
     --grid-desktop-horizontal-spacing: {{ section.settings.grid_desktop_horizontal_spacing }}px;
-    --multicolumn-card-icon-subtitle-position: {{ section.settings.multicolumn_card_icon_subtitle_position }};
   }
+
+
 {%- endstyle -%}
 
 {%- liquid

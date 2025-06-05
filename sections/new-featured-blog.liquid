@@ -1,0 +1,492 @@
+{%- style -%}
+    #shopify-section-{{ section.id }}{
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .new-featured-blog-section .featured-blog-heading{
+      color: {{ section.settings.heading_color }};
+    }
+
+    @media (max-width:768px){
+      #shopify-section-{{ section.id }}{
+        padding-top: {{ section.settings.padding_top  | times: 0.75 | round: 0 }}px;
+        padding-bottom: {{ section.settings.padding_bottom  | times: 0.75 | round: 0 }}px;
+      }
+    }
+
+    {% if section.settings.mobile_slider == true %}
+      @media (min-width:768px){
+          .blog-articles {
+              display: grid;
+              /* grid-template-columns: 2fr 1fr; */
+              grid-auto-rows: 1fr;
+              gap: 16px;
+            }
+            .article-card-wrapper {
+              height: 100%;
+            }
+            
+            /* First article spans two rows */
+            .first-article {
+              grid-row: span 2;
+            }
+          }
+        @media (max-width:767px){
+        .blog-articles {
+            display: flex;
+            grid-template-columns: 1fr;
+        }
+      }
+        {% else %}
+          .blog-articles {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 16px;
+            }
+        @media (max-width: 768px){
+          .blog-articles {
+            grid-template-columns: repeat(1, 1fr);
+          }
+  }
+      {% endif %}
+.custom-articles-layout {
+  display: flex;
+  gap: 20px;
+}
+
+.left-article {
+  position: relative;
+  color: #fff;
+  width:60%;
+}
+
+.left-article .media-wrapper img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.left-article .content-wrapper {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  width: 100%;
+}
+
+.right-articles {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width:40%;
+}
+
+.right-article {
+  display: flex;
+  gap: 16px;
+}
+
+.right-article .media-wrapper {
+  width: 40%;
+  flex-shrink: 0;
+}
+
+.right-article .content-wrapper {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.right-article .article-card__image{
+    width:100%;
+    height:100%;
+}
+.overlay-style {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  color: white;
+}
+.right-articles .card:not(.ratio){
+    flex-direction: unset;
+}
+.new-featured-blog-section .card__media .media img{
+    object-fit:contain;
+}
+
+{%- endstyle -%}
+
+{{ 'component-featured-blog.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'component-article-card.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- assign blog = blogs[section.settings.blog] -%}
+
+<section class="new-featured-blog-section">
+  <div class="page-width {% if section.settings.mobile_slider == true %}swiper featured-blog-swiper{% endif %}">
+    {%- if section.settings.text_alignment -%}
+      <{{ section.settings.heading_size }}
+        class="featured-blog-heading text-{{ section.settings.text_alignment }}"
+        ms-aos
+        data-ms-delay="100"
+      >
+        {{ section.settings.title }}
+      </{{ section.settings.heading_size }}>
+    {%- endif -%}
+
+    {% if blog.articles.size == 0 %}
+      <p class="text-center justify-center d-flex" ms-aos data-ms-delay="200">{{ 'blogs.article.empty' | t }}</p>
+    {% else %}
+      <div
+        class="blog-articles {% if section.settings.mobile_slider == true %}swiper-wrapper{% endif %}"
+        ms-aos
+        data-ms-delay="200"
+      >
+        
+        <div class="mobile-slider {% if section.settings.mobile_slider == true %}swiper-slide{% endif %} article-card-wrapper {% if forloop.first %}first-article{% endif %}">
+            <div class="custom-articles-layout">
+              <div class="left-article article-card">
+                {% render 'article-card', article: blog.articles[0], 
+                overlay: true,
+                show_image: section.settings.show_image,
+                show_author: section.settings.show_author,
+                show_date: section.settings.show_date,
+                show_tags: section.settings.show_tags,
+                tag_bg: section.settings.tag_bg,
+                tag_color: section.settings.tag_color,
+                date_patterns: section.settings.date_formats_patterns,
+                date_comment_bg: section.settings.date_comment_bg,
+                date_comment_color: section.settings.date_comment_color,
+                show_excerpt: section.settings.show_excerpt,
+                media_ratio: section.settings.media_ratio,
+                blog_comment: blog.comments_enabled?,
+                article_card_bg: section.settings.article_background,
+                article_text_color: section.settings.article_color,
+                excerpt_color: section.settings.excerpt_color
+                %}
+              </div>
+              <div class="right-articles">
+                <div class="right-article article-card horizontal-layout">
+                 {% render 'article-card', article: blog.articles[1],
+                  show_image: section.settings.show_image,
+                  show_author: section.settings.show_author,
+                  show_date: section.settings.show_date,
+                  show_tags: section.settings.show_tags,
+                  tag_bg: section.settings.tag_bg,
+                  tag_color: section.settings.tag_color,
+                  date_patterns: section.settings.date_formats_patterns,
+                  date_comment_bg: section.settings.date_comment_bg,
+                  date_comment_color: section.settings.date_comment_color,
+                  show_excerpt: section.settings.show_excerpt,
+                  media_ratio: section.settings.media_ratio,
+                  blog_comment: blog.comments_enabled?,
+                  article_card_bg: section.settings.article_background,
+                  article_text_color: section.settings.article_color,
+                  excerpt_color: section.settings.excerpt_color
+                  %}
+              </div>
+                <div class="right-article article-card horizontal-layout">
+                 {% render 'article-card', article: blog.articles[2],
+                  show_image: section.settings.show_image,
+                  show_author: section.settings.show_author,
+                  show_date: section.settings.show_date,
+                  show_tags: section.settings.show_tags,
+                  tag_bg: section.settings.tag_bg,
+                  tag_color: section.settings.tag_color,
+                  date_patterns: section.settings.date_formats_patterns,
+                  date_comment_bg: section.settings.date_comment_bg,
+                  date_comment_color: section.settings.date_comment_color,
+                  show_excerpt: section.settings.show_excerpt,
+                  media_ratio: section.settings.media_ratio,
+                  blog_comment: blog.comments_enabled?,
+                  article_card_bg: section.settings.article_background,
+                  article_text_color: section.settings.article_color,
+                  excerpt_color: section.settings.excerpt_color
+                  %}
+              </div>
+              </div>
+           </div>
+          </div>
+        
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Featured Blogs",
+  "tag": "section",
+  "class": "section-featured-blog",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_full_width",
+      "label": "Enable Full Width",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Header Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Blog posts"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "Extra Large"
+        },
+        {
+          "value": "h2",
+          "label": "Large"
+        },
+        {
+          "value": "h3",
+          "label": "Medium"
+        },
+        {
+          "value": "h4",
+          "label": "Small"
+        },
+        {
+          "value": "h5",
+          "label": "Extra Small"
+        },
+        {
+          "value": "h6",
+          "label": "Tiny"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Blog Selection"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select Blog"
+    },
+    {
+      "type": "header",
+      "content": "Customization"
+    },
+    {
+      "type": "range",
+      "id": "article_limit",
+      "label": "Article Limit",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show Image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show Author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show Date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show Tags",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "date_formats_patterns",
+      "label": "Date Format",
+      "options": [
+        {
+          "label": "DD MMM, YYYY",
+          "value": "%d %b, %Y"
+        },
+        {
+          "label": "MMM DD, YYYY",
+          "value": "%b %d, %Y"
+        },
+        {
+          "label": "YYYY-DD-MMM",
+          "value": "%Y-%d-%b"
+        }
+      ],
+      "default": "%b %d, %Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show Excerpt",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "Media Ratio",
+      "options": [
+        {
+          "value": "original",
+          "label": "Original"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        },
+        {
+          "value": "full-screen",
+          "label": "Full Screen"
+        },
+        {
+          "value": "wide-screen",
+          "label": "Wide Screen"
+        }
+      ],
+      "default": "original"
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "article_background",
+      "label": "Article Background Color"
+    },
+    {
+      "type": "color",
+      "id": "article_color",
+      "label": "Article Text Color"
+    },
+    {
+      "type": "color",
+      "id": "excerpt_color",
+      "label": "Excerpt Color"
+    },
+    {
+      "type": "color",
+      "id": "date_comment_bg",
+      "label": "Date Comment Background Color"
+    },
+    {
+      "type": "color",
+      "id": "date_comment_color",
+      "label": "Date Comment Text Color"
+    },
+    {
+      "type": "color",
+      "id": "tag_bg",
+      "label": "Tag Background Color"
+    },
+    {
+      "type": "color",
+      "id": "tag_color",
+      "label": "Tag Title Color"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Customization"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_slider",
+      "label": "Enable Mobile Slider",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Vertical Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "New featured blogs",
+      "category": "Custom",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

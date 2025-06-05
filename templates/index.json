@@ -493,13 +493,13 @@
             "feature_1": "Whey Based",
             "feature_2": "Build Muscle",
             "feature_3": "Clean Ingredients",
-            "feature_desc": "Active Ingredients",
-            "ingredient_title": "Whey Protein Isolate 1",
-            "ingredient_desc": "Low Calorie With Virtually No Fat or Lactose, Quickly Absorbed To Maximize Muscle Building & Repair. 1",
+            "ingredients_title": "Active Ingredients",
+            "ingredient_title_1": "Whey Protein Isolate",
+            "ingredient_desc_1": "Low Calorie With Virtually No Fat or Lactose, Quickly Absorbed To Maximize Muscle Building & Repair.",
             "ingredient_title_2": "Whey Protein Isolate 2",
-            "ingredient_desc_2": "Low Calorie With Virtually No Fat or Lactose, Quickly Absorbed To Maximize Muscle Building & Repair. 2",
-            "ingredient_title_3": "Whey Protein Isolate 3",
-            "ingredient_desc_3": "Low Calorie With Virtually No Fat or Lactose, Quickly Absorbed To Maximize Muscle Building & Repair. 3",
+            "ingredient_desc_2": "Low Calorie With Virtually No Fat or Lactose, Quickly Absorbed To Maximize Muscle Building & Repair.",
+            "ingredient_title_3": "Whey Protein Isolate",
+            "ingredient_desc_3": "Low Calorie With Virtually No Fat or Lactose, Quickly Absorbed To Maximize Muscle Building & Repair.",
             "customize_btn": "Customize This Blend"
           }
         },
@@ -511,13 +511,13 @@
             "feature_1": "Whey Based",
             "feature_2": "Whey Based 2",
             "feature_3": "Whey Based 3",
-            "feature_desc": "Active Ingredients",
-            "ingredient_title": "Whey Protein Isolate 2 1",
-            "ingredient_desc": "Low Calorie with Virtually No Fat or Lactose. Quickly Absorbed To Maximize Muscle Building & Repair. 2 1",
-            "ingredient_title_2": "Whey Protein Isolate 2 2",
-            "ingredient_desc_2": "Low Calorie with Virtually No Fat or Lactose. Quickly Absorbed To Maximize Muscle Building & Repair. 2 2",
-            "ingredient_title_3": "Whey Protein Isolate 2 3",
-            "ingredient_desc_3": "Low Calorie with Virtually No Fat or Lactose. Quickly Absorbed To Maximize Muscle Building & Repair. 2 3",
+            "ingredients_title": "Active Ingredients",
+            "ingredient_title_1": "Whey Protein Isolate",
+            "ingredient_desc_1": "Low Calorie With Virtually No Fat or Lactose, Quickly Absorbed To Maximize Muscle Building & Repair.",
+            "ingredient_title_2": "Whey Protein Isolate",
+            "ingredient_desc_2": "Low Calorie with Virtually No Fat or Lactose. Quickly Absorbed To Maximize Muscle Building & Repair.",
+            "ingredient_title_3": "Whey Protein Isolate",
+            "ingredient_desc_3": "Low Calorie with Virtually No Fat or Lactose. Quickly Absorbed To Maximize Muscle Building & Repair.",
             "customize_btn": "Customize This Blend 2"
           }
         }
@@ -527,7 +527,139 @@
         "slide_rwtjBb"
       ],
       "name": "Product Info Slider",
-      "settings": {}
+      "settings": {
+        "title": "Customized Protein Powder",
+        "sub_title": "Simple & Effective Ingredients"
+      }
+    },
+    "image_overlay_6cbQwy": {
+      "type": "image-overlay",
+      "name": "Image Overlay",
+      "settings": {
+        "hero_image": "shopify://shop_images/9f5816f4e4c9683702294b62e03a4063cd120030.png",
+        "hero_title": "The Next Generation is Here",
+        "hero_subtitle": "Innovative Engineering. Intelligent Design. Meet The Plunge MK.1",
+        "primary_button_text": "Take The Plunge",
+        "primary_button_link": "#",
+        "secondary_button_text": "Dive Deeper",
+        "secondary_button_link": "#"
+      }
+    },
+    "featured_blog_aqAHtk": {
+      "type": "featured-blog",
+      "name": "t:sections.featured-blog.presets.name",
+      "settings": {
+        "blog": "balanced-diet",
+        "post_limit": 3,
+        "heading": "Blog posts",
+        "heading_size": "h1",
+        "columns_desktop": 3,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "instagram_8Xj9KW": {
+      "type": "instagram",
+      "blocks": {
+        "instagram_handle_k3F8T3": {
+          "type": "instagram_handle",
+          "settings": {
+            "handle_title": "@uncmfrt.com",
+            "store_icon": "shopify://shop_images/Group_2856.png",
+            "handle_button_text": "Follow Us on Instagram"
+          }
+        },
+        "instagram_KcYPzi": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/134d3f4c1eedbeee8e2ac3ae1779c55abddedda1.jpg"
+          }
+        },
+        "instagram_pg4w7P": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/644e6a0c8685771e8012fc7315b4da64384c03b2.jpg"
+          }
+        },
+        "instagram_xD8wKq": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/07010e1aeda489af3bb195329ed761744130f2c5.jpg"
+          }
+        },
+        "instagram_7rTRPK": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/102b3c0173629a9dc2bc50aff25b6f4866ea3f74.jpg"
+          }
+        },
+        "instagram_zw96XB": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/db09feba3cb844d67636c6a0e73fcd9f7eddd115.jpg"
+          }
+        },
+        "instagram_axB7Nn": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/4a7ee6cad1710e3e2619cd92705069a29344b165.jpg"
+          }
+        },
+        "instagram_Cf9wG7": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/1edd015ddc5e791d0bb0db166122db283583bb7d.jpg"
+          }
+        },
+        "instagram_Ge8qPe": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/c3c558afa6ad1f78192d8dbbe42072501f0fb2bd.jpg"
+          }
+        },
+        "instagram_Bj6piC": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/125bc34306ce7cb040ca34b34e18b85f563739cd.jpg"
+          }
+        },
+        "instagram_tMWMtj": {
+          "type": "instagram",
+          "settings": {
+            "image": "shopify://shop_images/577a6878f2f45c899583bd02757bcf4cf63bb0a0.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "instagram_handle_k3F8T3",
+        "instagram_KcYPzi",
+        "instagram_pg4w7P",
+        "instagram_xD8wKq",
+        "instagram_7rTRPK",
+        "instagram_zw96XB",
+        "instagram_axB7Nn",
+        "instagram_Cf9wG7",
+        "instagram_Ge8qPe",
+        "instagram_Bj6piC",
+        "instagram_tMWMtj"
+      ],
+      "name": "Instagram Section Preset",
+      "settings": {
+        "title": "",
+        "description": "",
+        "heading_size": "h4",
+        "heading_alignment": "center",
+        "heading_color": "",
+        "description_color": "",
+        "background_color": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
     }
   },
   "order": [
@@ -539,6 +671,9 @@
     "logo_list_pGqnHf",
     "video_product_slider_G7rKHP",
     "feature_collection_tab_KbzEYJ",
-    "product_info_slider_L7PkMq"
+    "product_info_slider_L7PkMq",
+    "image_overlay_6cbQwy",
+    "featured_blog_aqAHtk",
+    "instagram_8Xj9KW"
   ]
 }
