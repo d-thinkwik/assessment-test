@@ -84,6 +84,31 @@
 .featured-article-left{
   position: relative;
 }
+.left-article .card__content{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  color: white;
+}
+.left-article .card__heading.h2 a.full-unstyled-link{
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  max-width:330px;
+}
+.article-card__info{
+  display:flex;
+  column-gap:32px;
+}
+.article-tag{
+  text-transform: capitalize;
+}
+.article-card-wrapper .card__heading  .full-unstyled-link{
+  font-size:18px;
+}
 @media screen and (min-width: 990px) {
   .article-card__link:not(:only-child) {
     margin-right: 4rem;

@@ -9,23 +9,26 @@
  */
 {
   "sections": {
-    "video_VUrAq7": {
-      "type": "video",
-      "name": "t:sections.video.presets.name",
+    "hero_video_4XRJWp": {
+      "type": "hero-video",
+      "name": "Video Section",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "enable_video_looping": true,
-        "video": "shopify://files/videos/AMIN.O. ENERGY (online-video-cutter.com).mp4",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "cover_image": "shopify://shop_images/Rectangle_3.png",
-        "description": "video",
-        "full_width": true,
-        "color_scheme": "",
-        "padding_top": 0,
-        "padding_bottom": 0,
+        "enable_full_width": true,
+        "thumbnail": "shopify://shop_images/Group_6.png",
         "overlay_text": "Great things never camefrom comfort zones.",
-        "button_text": "Shop Now"
+        "button_text": "Shop Now",
+        "heading_size": "h4",
+        "heading_alignment": "center",
+        "heading_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0.4,
+        "video_type": "video",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video": "shopify://files/videos/AMIN.O. ENERGY (online-video-cutter.com).mp4",
+        "video_autoplay": true,
+        "video_mute": true,
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "marquee_zDwJAD": {
@@ -226,8 +229,8 @@
         "column_alignment": "left",
         "background_style": "primary",
         "color_scheme": "",
-        "columns_mobile": "1",
-        "grid_desktop_horizontal_spacing": 20,
+        "columns_mobile": "2",
+        "grid_desktop_horizontal_spacing": 38,
         "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
@@ -660,10 +663,41 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "new_featured_blog_pfcbhr": {
+      "type": "new-featured-blog",
+      "disabled": true,
+      "name": "New featured blogs",
+      "settings": {
+        "enable_full_width": true,
+        "title": "Blog posts",
+        "heading_size": "h2",
+        "text_alignment": "center",
+        "heading_color": "#000000",
+        "blog": "balanced-diet",
+        "article_limit": 2,
+        "show_image": true,
+        "show_author": true,
+        "show_date": true,
+        "show_tags": true,
+        "date_formats_patterns": "%b %d, %Y",
+        "show_excerpt": true,
+        "media_ratio": "original",
+        "article_background": "",
+        "article_color": "",
+        "excerpt_color": "",
+        "date_comment_bg": "",
+        "date_comment_color": "",
+        "tag_bg": "",
+        "tag_color": "",
+        "mobile_slider": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
-    "video_VUrAq7",
+    "hero_video_4XRJWp",
     "marquee_zDwJAD",
     "review_brand_icons_e3Cx8Q",
     "multicolumn_qKFAE7",
@@ -674,6 +708,7 @@
     "product_info_slider_L7PkMq",
     "image_overlay_6cbQwy",
     "featured_blog_aqAHtk",
-    "instagram_8Xj9KW"
+    "instagram_8Xj9KW",
+    "new_featured_blog_pfcbhr"
   ]
 }
