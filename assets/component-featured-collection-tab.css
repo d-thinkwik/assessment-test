@@ -179,6 +179,27 @@
   .review-content-rating{
     width: 10%;
   }
+  .add-to-cart-tab-btn .button--full-width{
+    min-width: 105px;
+    padding: 0px;
+    min-height: 27px;
+    font-size: 13px;
+    border: none;
+    box-shadow: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  .add-to-cart-tab-btn .button--full-width:hover{
+    background-color: #fff;
+    color:#1B1F23;
+    transition: all 0.3s ease;
+  }
+  .add-to-cart-tab-btn .button--full-width:after{
+    box-shadow: none;
+  }
+  .add-to-cart-tab-btn .button--full-width:hover:after{
+    box-shadow: none;
+  }
   @media (max-width: 1700px) {
     .collection-items-top-wrapper-right{
       padding-left:0px;
